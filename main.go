@@ -1,14 +1,12 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
-	"io"
-	"text/template"
 
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sns"
 	"github.com/sensu-community/sensu-plugin-sdk/sensu"
+	"github.com/sensu-community/sensu-plugin-sdk/templates"
 	"github.com/sensu/sensu-go/types"
 )
 
@@ -17,11 +15,6 @@ type Config struct {
 	sensu.PluginConfig
 	TopicARN string
 	Message  string
-}
-
-// used to handle getting text/template or html/template
-type templater interface {
-        Execute(wr io.Writer, data interface{}) error
 }
 
 var (
@@ -69,7 +62,7 @@ func checkArgs(_ *types.Event) error {
 
 func executeHandler(event *types.Event) error {
 
-	message, err := resolveTemplate(plugin.Message, event)
+	message, err := templates.EvalTemplate("SNSMessage", plugin.Message, event)
 	if err != nil {
 		return err
 	}
@@ -87,25 +80,3 @@ func executeHandler(event *types.Event) error {
 	})
 	return err
 }
-
-func resolveTemplate(templateValue string, event *types.Event) (string, error) {
-        var (
-                resolved bytes.Buffer
-                tmpl     templater
-                err      error
-        )
-
-        tmpl, err = template.New("test").Parse(templateValue)
-
-        if err != nil {
-                return "", err
-        }
-
-        err = tmpl.Execute(&resolved, *event)
-        if err != nil {
-                return "", err
-        }
-
-        return resolved.String(), nil
-}
-
