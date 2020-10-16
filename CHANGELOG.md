@@ -9,6 +9,7 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ### Changed
 - Updated to use SDK templating
+- Updated SDK version to v0.10.1
 
 ## [0.1.0] - 2020-04-16
 
