@@ -9,8 +9,9 @@ require (
 	github.com/StackExchange/wmi v0.0.0-20180725035823-b12b22c5341f // indirect
 	github.com/ash2k/stager v0.0.0-20170622123058-6e9c7b0eacd4 // indirect
 	github.com/atlassian/gostatsd v0.0.0-20180514010436-af796620006e // indirect
-	github.com/aws/aws-sdk-go v1.30.8
+	github.com/aws/aws-sdk-go v1.35.8
 	github.com/coreos/bbolt v1.3.3 // indirect
+	github.com/coreos/etcd v3.3.25+incompatible // indirect
 	github.com/coreos/go-etcd v2.0.0+incompatible // indirect
 	github.com/coreos/go-systemd v0.0.0-20190719114852-fd7a80b32e1f // indirect
 	github.com/cpuguy83/go-md2man v1.0.10 // indirect
@@ -18,9 +19,12 @@ require (
 	github.com/docker/docker v0.0.0-20180409082103-cbde00b44273 // indirect
 	github.com/emicklei/proto v1.1.0 // indirect
 	github.com/frankban/quicktest v1.7.2 // indirect
+	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/go-ole/go-ole v0.0.0-20170209151332-de8695c8edbf // indirect
 	github.com/go-resty/resty v0.0.0-20170925192930-9ac9c42358f7 // indirect
+	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/golang/groupcache v0.0.0-20191002201903-404acd9df4cc // indirect
+	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/gorilla/context v0.0.0-20160226214623-1ea25387ff6f // indirect
 	github.com/gorilla/mux v1.6.2 // indirect
 	github.com/gotestyourself/gotestyourself v2.2.0+incompatible // indirect
@@ -33,14 +37,18 @@ require (
 	github.com/hashicorp/go-version v1.2.0 // indirect
 	github.com/ipfs/go-log v0.0.0-20180416040000-7ecd3df29a4a // indirect
 	github.com/jbenet/go-reuseport v0.0.0-20180416043609-15a1cd37f050 // indirect
+	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/libp2p/go-reuseport v0.0.0-20180416043609-15a1cd37f050 // indirect
 	github.com/libp2p/go-sockaddr v0.0.0-20180329070516-f3e9f73a53d1 // indirect
+	github.com/magiconair/properties v1.8.4 // indirect
 	github.com/mattn/go-runewidth v0.0.2 // indirect
 	github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b // indirect
 	github.com/mholt/archiver/v3 v3.3.1-0.20191129193105-44285f7ed244 // indirect
+	github.com/mitchellh/mapstructure v1.3.3 // indirect
 	github.com/olekukonko/tablewriter v0.0.0-20180506121414-d4647c9c7a84 // indirect
-	github.com/pelletier/go-toml v1.6.0 // indirect
+	github.com/pelletier/go-toml v1.8.1 // indirect
 	github.com/prometheus/client_golang v1.2.0 // indirect
+	github.com/robertkrimen/otto v0.0.0-20200922221731-ef014fd054ac // indirect
 	github.com/robfig/cron v1.2.0 // indirect
 	github.com/sensu-community/sensu-plugin-sdk v0.10.1
 	github.com/sensu/lasr v1.2.1 // indirect
@@ -48,21 +56,27 @@ require (
 	github.com/sensu/sensu-go/types v0.3.0
 	github.com/shirou/gopsutil v0.0.0-20180801053943-8048a2e9c577 // indirect
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
-	github.com/spf13/afero v1.2.2 // indirect
+	github.com/sirupsen/logrus v1.7.0 // indirect
+	github.com/spf13/afero v1.4.1 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
+	github.com/spf13/cobra v1.1.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/viper v1.7.1 // indirect
 	github.com/stretchr/testify v1.6.0
 	github.com/ugorji/go/codec v0.0.0-20181204163529-d75b2dcb6bc8 // indirect
 	github.com/whyrusleeping/go-logging v0.0.0-20170515211332-0457bb6b88fc // indirect
 	github.com/willf/pad v0.0.0-20160331131008-b3d780601022 // indirect
 	go.uber.org/multierr v1.2.0 // indirect
-	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 // indirect
-	golang.org/x/sys v0.0.0-20200120151820-655fe14d7479 // indirect
+	golang.org/x/net v0.0.0-20201010224723-4f7140c49acb // indirect
+	golang.org/x/sys v0.0.0-20201015000850-e3ed0017c211 // indirect
 	golang.org/x/time v0.0.0-20190921001708-c4c64cad1fd0 // indirect
+	google.golang.org/genproto v0.0.0-20201015140912-32ed001d685c // indirect
+	google.golang.org/grpc v1.33.0 // indirect
+	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/AlecAivazis/survey.v1 v1.4.0 // indirect
 	gopkg.in/h2non/filetype.v1 v1.0.3 // indirect
-	gopkg.in/ini.v1 v1.51.1 // indirect
+	gopkg.in/ini.v1 v1.62.0 // indirect
 	gotest.tools v2.2.0+incompatible // indirect
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
