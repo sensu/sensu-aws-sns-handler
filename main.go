@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/sns"
 	"github.com/sensu-community/sensu-plugin-sdk/sensu"
 	"github.com/sensu-community/sensu-plugin-sdk/templates"
-	"github.com/sensu/sensu-go/types"
+	corev2 "github.com/sensu/sensu-go/api/core/v2"
 )
 
 // Config represents the handler plugin config.
@@ -53,14 +53,14 @@ func main() {
 	handler.Execute()
 }
 
-func checkArgs(_ *types.Event) error {
+func checkArgs(_ *corev2.Event) error {
 	if len(plugin.TopicARN) == 0 {
 		return fmt.Errorf("--topic-arn or SNS_TOPIC_ARN environment variable is required")
 	}
 	return nil
 }
 
-func executeHandler(event *types.Event) error {
+func executeHandler(event *corev2.Event) error {
 
 	message, err := templates.EvalTemplate("SNSMessage", plugin.Message, event)
 	if err != nil {
