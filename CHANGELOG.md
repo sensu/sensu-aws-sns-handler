@@ -7,6 +7,9 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+###
+- Added assume role arn support
+
 ### Changed
 - Updated to use SDK templating
 - Updated SDK version to v0.11.0
