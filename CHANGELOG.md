@@ -7,7 +7,9 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
-###
+## [0.2.0] - 2020-12-04
+
+### Changed
 - Added assume role arn support
 
 ### Changed
