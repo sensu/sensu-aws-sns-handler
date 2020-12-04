@@ -44,9 +44,10 @@ Available Commands:
   version     Print the version number of this plugin
 
 Flags:
-  -h, --help                      help for sensu-aws-sns-handler
-  -m, --message-template string   The template for the message sent via SNS (default "{{.Entity.Name}}/{{.Check.Name}}: {{.Check.State}}")
   -t, --topic-arn string          The SNS Topic ARN
+  -m, --message-template string   The template for the message sent via SNS (default "{{.Entity.Name}}/{{.Check.Name}}: {{.Check.State}}")
+  -a, --assume-role-arn string    The IAM role to assume upon succssful authentication
+  -h, --help                      help for sensu-aws-sns-handler
 ```
 
 ## Configuration
@@ -126,6 +127,9 @@ For example, if you use IAM roles for Amazon EC2 instances, your applications au
 instance’s credentials. You don’t need to manually configure credentials in your application.
 
 Source: [Configuring the AWS SDK for Go][3]
+
+This plugin also supports assuming a new role upon authentication using the `--assume-role-arn`
+option.
 
 If you go the route of using environment variables, it is highly suggested you use them via the
 [Env secrets provider][7].
