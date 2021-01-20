@@ -8,6 +8,7 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 ## Unreleased
 
 ### Changed
+- Moved to sensu org
 - README updates regarding annotations, remove empty sections, general cleanup
 - Ran 'go get -u' and 'go mod tidy' to update all modules
 - GitHub Actions: add lint, add pull_request for test

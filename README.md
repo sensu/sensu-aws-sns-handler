@@ -1,6 +1,6 @@
-[![Sensu Bonsai Asset](https://img.shields.io/badge/Bonsai-Download%20Me-brightgreen.svg?colorB=89C967&logo=sensu)](https://bonsai.sensu.io/assets/nixwiz/sensu-aws-sns-handler)
-![Go Test](https://github.com/nixwiz/sensu-aws-sns-handler/workflows/Go%20Test/badge.svg)
-![goreleaser](https://github.com/nixwiz/sensu-aws-sns-handler/workflows/goreleaser/badge.svg)
+[![Sensu Bonsai Asset](https://img.shields.io/badge/Bonsai-Download%20Me-brightgreen.svg?colorB=89C967&logo=sensu)](https://bonsai.sensu.io/assets/sensu/sensu-aws-sns-handler)
+![Go Test](https://github.com/sensu/sensu-aws-sns-handler/workflows/Go%20Test/badge.svg)
+![goreleaser](https://github.com/sensu/sensu-aws-sns-handler/workflows/goreleaser/badge.svg)
 
 # Sensu AWS SNS Handler
 
@@ -61,7 +61,7 @@ consider doing so! If you're using sensuctl 5.13 with Sensu Backend 5.13 or late
 following command to add the asset:
 
 ```
-sensuctl asset add nixwiz/sensu-aws-sns-handler
+sensuctl asset add sensu/sensu-aws-sns-handler
 ```
 
 If you're using an earlier version of sensuctl, you can find the asset on the [Bonsai Asset Index][6].
@@ -162,7 +162,7 @@ For more information about contributing to this plugin, see [Contributing][1].
 [3]: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html
 [4]: https://docs.sensu.io/sensu-go/latest/reference/handlers/
 [5]: https://docs.sensu.io/sensu-go/latest/reference/assets/
-[6]: https://bonsai.sensu.io/assets/nixwiz/sensu-aws-sns-handler
+[6]: https://bonsai.sensu.io/assets/sensu/sensu-aws-sns-handler
 [7]: https://docs.sensu.io/sensu-go/latest/guides/secrets-management/#use-env-for-secrets-management
 [8]: https://docs.sensu.io/sensu-go/latest/observability-pipeline/observe-process/handler-templates/
 [9]: https://docs.sensu.io/sensu-go/latest/observability-pipeline/observe-schedule/checks/#check-token-substitution

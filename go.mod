@@ -1,4 +1,4 @@
-module github.com/nixwiz/sensu-aws-sns-handler
+module github.com/sensu/sensu-aws-sns-handler
 
 go 1.14
 
