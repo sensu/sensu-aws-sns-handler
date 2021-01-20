@@ -99,9 +99,16 @@ func executeHandler(event *corev2.Event) error {
 	}
 
 	// message should be a template with a specific default
-	_, err = svc.Publish(&sns.PublishInput{
+	publishOut, err := svc.Publish(&sns.PublishInput{
 		Message:  &message,
 		TopicArn: &plugin.TopicARN,
 	})
-	return err
+	if err != nil {
+		return fmt.Errorf("Failed to publish message to SNS: %v", err)
+	}
+
+	// FUTURE: send to activities hub
+	fmt.Printf("SNS message published, message id %s\n", *publishOut.MessageId)
+	return nil
+
 }

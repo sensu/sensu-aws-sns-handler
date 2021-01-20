@@ -7,6 +7,12 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### Changed
+- README updates regarding annotations, remove empty sections, general cleanup
+- Ran 'go get -u' and 'go mod tidy' to update all modules
+- GitHub Actions: add lint, add pull_request for test
+- Capture and output published Message ID, note for future use
+
 ## [0.2.0] - 2020-12-04
 
 ### Changed
