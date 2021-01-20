@@ -4,12 +4,11 @@
 
 # Sensu AWS SNS Handler
 
-# sensu-aws-sns-handler
-
 ## Table of Contents
 - [Overview](#overview)
-- [Files](#files)
 - [Usage examples](#usage-examples)
+  - [Help output](#help-output)
+  - [Templates](#templates)
 - [Configuration](#configuration)
   - [Asset registration](#asset-registration)
   - [Handler definition](#handler-definition)
@@ -24,13 +23,9 @@
 The sensu-aws-sns-handler is a [Sensu Handler][4] that allows you to send alerts via AWS
 Simple Notification Service (SNS).
 
-## Files
-
-N/A
-
 ## Usage examples
 
-### Help
+### Help output
 
 ```
 AWS Simple Notification Service Handler
@@ -50,8 +45,14 @@ Flags:
   -h, --help                      help for sensu-aws-sns-handler
 ```
 
+### Templates
+
+This handler provides options for using templates to populate the values
+provided by the event in the message sent via SNS. More information on
+template syntax and format can be found in [the documentation][8]
+
+
 ## Configuration
-### Sensu Go
 
 ### Asset registration
 
@@ -86,6 +87,12 @@ spec:
 All arguments for this handler are tunable on a per entity or check basis based on annotations.  The
 annotations keyspace for this handler is `sensu.io/plugins/sensu-aws-sns-handler/config`.
 
+**NOTE**: Due to [check token substituion][9], supplying a template value such
+as for `message-template` as a check annotation requires that you place the
+desired template as a [golang string literal][10] (enlcosed in backticks)
+within another template definition.  This does not apply to entity annotations.
+
+
 #### Examples
 
 To change the SNS topic ARN for a particular entity, in that agent's agent.yml file
@@ -104,7 +111,7 @@ api_version: core/v2
 metadata:
   annotations:
     fatigue_check/occurrences: "3"
-    sensu.io/plugins/sensu-aws-sns-handler/config/message-template: "{{.Entity.Name}}/{{.Check.Name}}: {{.Check.State}}, {{.Check.Occurrences}}"
+    sensu.io/plugins/sensu-aws-sns-handler/config/message-template: "{{`{{.Entity.Name}}/{{.Check.Name}}: {{.Check.State}}, {{.Check.Occurrences}}`}}"
 [...]
 ```
 
@@ -138,15 +145,13 @@ If you go the route of using environment variables, it is highly suggested you u
 
 The preferred way of installing and deploying this plugin is to use it as an Asset. If you would
 like to compile and install the plugin from source or contribute to it, download the latest version
-or create an executable script from this source.
+or create an executable from this source.
 
 From the local path of the sensu-aws-sns-handler repository:
 
 ```
 go build
 ```
-
-## Additional notes
 
 ## Contributing
 
@@ -159,3 +164,6 @@ For more information about contributing to this plugin, see [Contributing][1].
 [5]: https://docs.sensu.io/sensu-go/latest/reference/assets/
 [6]: https://bonsai.sensu.io/assets/nixwiz/sensu-aws-sns-handler
 [7]: https://docs.sensu.io/sensu-go/latest/guides/secrets-management/#use-env-for-secrets-management
+[8]: https://docs.sensu.io/sensu-go/latest/observability-pipeline/observe-process/handler-templates/
+[9]: https://docs.sensu.io/sensu-go/latest/observability-pipeline/observe-schedule/checks/#check-token-substitution
+[10]: https://golang.org/ref/spec#String_literals
