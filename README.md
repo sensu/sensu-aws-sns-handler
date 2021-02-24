@@ -14,6 +14,7 @@
   - [Handler definition](#handler-definition)
   - [Annotations](#annotations)
   - [AWS Credentials](#aws-credentials)
+  - [Region support](#region-support)
 - [Installation from source](#installation-from-source)
 - [Additional notes](#additional-notes)
 - [Contributing](#contributing)
@@ -42,6 +43,7 @@ Flags:
   -t, --topic-arn string          The SNS Topic ARN
   -m, --message-template string   The template for the message sent via SNS (default "{{.Entity.Name}}/{{.Check.Name}}: {{.Check.State}}")
   -a, --assume-role-arn string    The IAM role to assume upon succssful authentication
+  -u, --use-ec2-region            Query the EC2 metadata for the region to use for SNS
   -h, --help                      help for sensu-aws-sns-handler
 ```
 
@@ -140,6 +142,18 @@ option.
 
 If you go the route of using environment variables, it is highly suggested you use them via the
 [Env secrets provider][7].
+
+### Region support
+
+The AWS SDK for Go uses the following criteria for determining the AWS region in which to use
+SNS:
+
+1. The AWS_REGION environment variable
+2. The shared configuration file (typically ~/.aws/config)
+
+If running the Sensu backend process on an EC2 instance, this handler also supports using the
+EC2 metadata to determine the region via the `--use-ec2-region` option.
+
 
 ## Installation from source
 

@@ -7,6 +7,9 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### Added
+- Added --use-ec2-region for getting region when ran on an EC2 instance
+
 ## [0.3.0] - 2021-01-20
 
 ### Changed
