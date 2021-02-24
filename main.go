@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/arn"
 	"github.com/aws/aws-sdk-go/aws/credentials/stscreds"
+	"github.com/aws/aws-sdk-go/aws/ec2metadata"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sns"
 	"github.com/sensu-community/sensu-plugin-sdk/sensu"
@@ -19,6 +20,7 @@ type Config struct {
 	TopicARN      string
 	Message       string
 	AssumeRoleARN string
+	UseEC2Region  bool
 }
 
 var (
@@ -58,6 +60,15 @@ var (
 			Usage:     "The IAM role to assume upon succssful authentication",
 			Value:     &plugin.AssumeRoleARN,
 		},
+		{
+			Path:      "use-ec2-region",
+			Env:       "",
+			Argument:  "use-ec2-region",
+			Shorthand: "u",
+			Default:   false,
+			Usage:     "Query the EC2 metadata for the region to use for SNS",
+			Value:     &plugin.UseEC2Region,
+		},
 	}
 )
 
@@ -91,12 +102,21 @@ func executeHandler(event *corev2.Event) error {
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 
-	if arn.IsARN(plugin.AssumeRoleARN) {
-		creds := stscreds.NewCredentials(sess, plugin.AssumeRoleARN)
-		svc = sns.New(sess, &aws.Config{Credentials: creds})
-	} else {
-		svc = sns.New(sess)
+	awsConfig := &aws.Config{}
+
+	if plugin.UseEC2Region {
+		ec2md := ec2metadata.New(sess)
+		region, err := ec2md.Region()
+		if err != nil {
+			return fmt.Errorf("Cannot determine region from EC2 metadata: %v", err)
+		}
+		awsConfig.Region = aws.String(region)
 	}
+
+	if arn.IsARN(plugin.AssumeRoleARN) {
+		awsConfig.Credentials = stscreds.NewCredentials(sess, plugin.AssumeRoleARN)
+	}
+	svc = sns.New(sess, awsConfig)
 
 	// message should be a template with a specific default
 	publishOut, err := svc.Publish(&sns.PublishInput{
