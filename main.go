@@ -19,6 +19,7 @@ type Config struct {
 	sensu.PluginConfig
 	TopicARN      string
 	Message       string
+	Subject       string
 	AssumeRoleARN string
 	UseEC2Region  bool
 }
@@ -50,6 +51,15 @@ var (
 			Default:   "{{.Entity.Name}}/{{.Check.Name}}: {{.Check.State}}",
 			Usage:     "The template for the message sent via SNS",
 			Value:     &plugin.Message,
+		},
+		{
+			Path:      "subject-template",
+			Env:       "SNS_SUBJECT_TEMPLATE",
+			Argument:  "subject-template",
+			Shorthand: "s",
+			Default:   "{{.Check.State}} - {{.Entity.Name}}/{{.Check.Name}}",
+			Usage:     "The template for the subject sent via SNS",
+			Value:     &plugin.Subject,
 		},
 		{
 			Path:      "assume-role-arn",
@@ -98,6 +108,11 @@ func executeHandler(event *corev2.Event) error {
 		return err
 	}
 
+	subject, err := templates.EvalTemplate("SNSSubject", plugin.Subject, event)
+	if err != nil {
+		return err
+	}
+
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
@@ -120,6 +135,7 @@ func executeHandler(event *corev2.Event) error {
 
 	// message should be a template with a specific default
 	publishOut, err := svc.Publish(&sns.PublishInput{
+		Subject:  &subject,
 		Message:  &message,
 		TopicArn: &plugin.TopicARN,
 	})
