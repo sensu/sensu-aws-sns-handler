@@ -41,6 +41,7 @@ Available Commands:
 
 Flags:
   -t, --topic-arn string          The SNS Topic ARN
+  -s, --subject-template string   The template for the subject sent via SNS (default "{{.Check.State}} - {{.Entity.Name}}/{{.Check.Name}}")
   -m, --message-template string   The template for the message sent via SNS (default "{{.Entity.Name}}/{{.Check.Name}}: {{.Check.State}}")
   -a, --assume-role-arn string    The IAM role to assume upon succssful authentication
   -u, --use-ec2-region            Query the EC2 metadata for the region to use for SNS

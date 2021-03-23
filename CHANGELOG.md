@@ -7,6 +7,12 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### Added
+- Added --subject-template argument for setting the SNS message subject
+
+### Changed
+- Updated module dependencies
+
 ## [0.4.0] - 2021-02-24
 
 ### Added
